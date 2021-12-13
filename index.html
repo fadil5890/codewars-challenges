@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Wars Completed Challenge</title>
+</head>
+<body>
+    
+    <script>
+        class VigenèreCipher {
+            constructor(key, abc){
+                this.key = key;
+                this.abc = abc;
+            }
+
+            result = ''
+            encode(str) {
+                this.result = ''
+                let newKey = this.key.padEnd(str.length,this.key);
+                for(let i = 0; i < str.length; i+=1){
+                    if(!this.abc.includes(str[i])) {this.result += str[i]; continue};
+                    let indexStr = this.abc.indexOf(str[i]), indexKey = this.abc.indexOf(newKey[i]), cipherChar = indexStr + indexKey;
+                    if(cipherChar >= this.abc.length) this.result += this.abc[cipherChar - this.abc.length];
+                    else this.result += this.abc[cipherChar];
+                }
+            }
+            decode(str) {
+                this.result = '';
+                let newKey = this.key.padEnd(str.length,this.key);
+                for(let i = 0; i < str.length; i+=1){
+                    if(!this.abc.includes(str[i])) {this.result += str[i]; continue};
+                    let indexStr = this.abc.indexOf(str[i]), indexKey = this.abc.indexOf(newKey[i]), cipherChar = indexStr - indexKey;
+                    if(cipherChar < 0) this.result += this.abc[cipherChar + this.abc.length];
+                    else this.result += this.abc[cipherChar];      
+                }
+            }
+            get getMessage() {
+                console.log(this.result);
+            }
+        }
+
+        let archive = new VigenèreCipher('fadillahakbar','abcdefghijklmnopqrstuvwxyz');
+        archive.encode('Hello World!');
+        archive.getMessage;
+        archive.encode('Hello World Too!');
+        archive.getMessage;
+        archive.getMessage;
+        </script>
+</body>
+</html>
