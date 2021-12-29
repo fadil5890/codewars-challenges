@@ -13,21 +13,12 @@ console.log(
 );
 
 function sudokuValidation(board){
-    // if(board.length !== 9) return false
-    // if(typeof board === 'string') flattenBoard = Array.from(board.replace(/[\s\n\D]/g,''),elem => Number(elem));
-    // let flattenBoard;
-    // flattenBoard = board.reduce((result,arr) => result.concat(...arr),[]);
-    // let mapped = board.map((elem,i) => {
-    //     return [elem.slice(0,3) , elem.slice(3,6) , elem.slice(6,9)]
-    // }).map(elem => elem[0]).reduce((result,arr) => result.concat(...arr),[]);
-    // console.log(horizontal);
-    // let test = board.some((elem,i) => elem.filter())
     for(let a = 0; a <= 6; a+=3){
         
         for(let b = 0; b <= 6; b+=3){
-            
-            let square = board.slice(a,a+3).map(elem => elem.slice(b,b+3)).reduce((result,arr) => result.concat(...arr),[]).filter((num,i,arr) => arr.indexOf(num) === i)
-            console.log(square);
+    
+            let square = board.slice(a,a+3).map(elem => elem.slice(b,b+3)).reduce((result,arr) => result.concat(...arr),[]).filter((num,i,arr) => arr.indexOf(num) === i).length
+            if(square !== 9) return false;
 
         }
 
@@ -37,7 +28,6 @@ function sudokuValidation(board){
         for(let i = 1; i <= 9; i+=1){
             let horizontal = board.slice(j,j+3).reduce((result,arr) => result.concat(...arr),[]).filter(elem => elem === i).length;
             let vertical = board.reduce((result,val) => result.concat(val.slice(j,j+3)),[]).filter(elem => elem === i).length
-            // let numOccurNTimes = flattenBoard.filter(elem => elem === i).length
             if (horizontal !== 3 || vertical !== 3) return false;
         }
 
